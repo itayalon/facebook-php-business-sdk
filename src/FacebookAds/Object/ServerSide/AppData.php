@@ -251,8 +251,10 @@ class AppData implements ArrayAccess {
    * Gets offset.
    * @param integer $offset Offset
    * @return mixed
+   * NOTE: removed strict return type for php 7.* support, itay@zaptush.com 29.3.23
+   * https://php.watch/versions/8.0/mixed-type
    */
-  public function offsetGet($offset) : mixed {
+  public function offsetGet($offset) {
     return isset($this->container[$offset]) ? $this->container[$offset] : null;
   }
 

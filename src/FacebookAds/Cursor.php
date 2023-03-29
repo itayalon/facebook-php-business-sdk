@@ -435,7 +435,12 @@ class Cursor implements \Iterator, \Countable, \ArrayAccess {
     $this->position = $position;
   }
 
-  public function current() : AbstractObject|bool {
+  /**
+   * @return AbstractObject|bool
+   * NOTE: removed strict union type return and moved to annotation for php 7.* support, itay@zaptush.com 29.3.23
+   * https://php.watch/versions/8.0/union-types
+   */
+  public function current() {
     return isset($this->objects[$this->position])
       ? $this->objects[$this->position]
       : false;
@@ -516,9 +521,11 @@ class Cursor implements \Iterator, \Countable, \ArrayAccess {
 
   /**
    * @param mixed $offset
-   * @return mixed
+   * @return mixed 
+   * NOTE: removed strict return type for php 7.* support, itay@zaptush.com 29.3.23
+   * https://php.watch/versions/8.0/mixed-type
    */
-  public function offsetGet($offset) : mixed {
+  public function offsetGet($offset) {
     return isset($this->objects[$offset]) ? $this->objects[$offset] : null;
   }
 }
